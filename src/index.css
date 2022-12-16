@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Typo Round Regular Demo";
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+/* button { */
+  /* Style the button with the Tailwind base button styles */
+  /* @apply font-bold py-2 px-4 rounded-full; */
+
+  /* Set the background color to red and add a glow effect */
+  /* background-color: red;
+  box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
+} */
