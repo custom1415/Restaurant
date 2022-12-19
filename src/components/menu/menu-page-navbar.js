@@ -6,11 +6,11 @@ import { FiShoppingCart } from "react-icons/fi";
 
 export const MenuNav = () => {
   return (
-    <div className="w-full h-20 flex justify-between items-center bg-slate-100 p-4 border border-b-gray-200">
+    <div className="w-full h-20 flex justify-between items-center p-4 ">
       <h3 className="text-3xl">Menu</h3>
       <div className="flex items-center w-50">
         <input
-          className="placeholder-gray-500 placeholder-opacity-100 outline-none p-2 focus:ring-0 "
+          className=" bg-slate-100 placeholder-gray-500 placeholder-opacity-100 outline-none py-2 px-3 focus:ring-0 rounded-3xl "
           placeholder="Search"
         />
         <IoMdNotificationsOutline className="ml-4 hover:text-gray-400" />
