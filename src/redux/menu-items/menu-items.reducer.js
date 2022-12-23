@@ -14,12 +14,31 @@ export const selectHidden = createSelector(
   [selectMenuReducer],
   (state) => state.hidden
 );
-console.log(modifiedFakearr);
+export const selectFavourites = createSelector(
+  [selectMenuReducer],
+  (state) => state.favourites
+);
+
+// export const selectQty = createSelector([selectMenuReducer], (state) => {
+//   const Find = state.filteredItems.find(
+//     (item) => item.name === state.modalValues.name
+//   );
+// });
+// let originalFilteredItems = [...state.filteredItems];
+
 const initialState = {
   items: modifiedFakearr,
   filteredItems: modifiedFakearr,
-  modalValues: { name: "", price: "", rating: "", time: "" },
+  originalFilteredItems: [],
+  modalValues: {
+    name: "default",
+    price: "default",
+    rating: "default",
+    time: "default",
+    quantity: "default",
+  },
   hidden: true,
+  favourites: [],
 };
 const menuSlice = createSlice({
   name: "menu",
@@ -28,8 +47,8 @@ const menuSlice = createSlice({
     filterMenu(state, action) {
       return {
         ...state,
-        filteredItems: [...state.items].filter((item) => {
-          if (action.payload === "All") return modifiedFakearr;
+        filteredItems: [...state.originalFilteredItems].filter((item) => {
+          if (action.payload === "All") return state.originalFilteredItems;
 
           return item.name === action.payload;
         }),
@@ -39,21 +58,64 @@ const menuSlice = createSlice({
       return {
         ...state,
         filteredItems: state.filteredItems.slice().sort((a, b) => {
-          console.log(action.payload);
-          return a[action.payload] - b[action.payload];
+          if (action.payload === "high-to-low") {
+            return b["price"] - a["price"];
+          }
+          return a["price"] - b["price"];
         }),
       };
     },
-
+    showDiscountedItems(state, action) {
+      return {
+        ...state,
+        filteredItems: [...state.originalFilteredItems].filter((item) => {
+          if (item["discount"]) {
+            return item;
+          }
+          return;
+        }),
+      };
+    },
     setHidden(state, action) {
       return {
         ...state,
         hidden: action.payload,
       };
     },
+    setFavourites(state, action) {
+      const { isFavourite, item } = action.payload;
+      console.log(action.payload);
+      if (isFavourite) {
+        return {
+          ...state,
+          favourites: [...state.favourites].filter(
+            (itemFav) => itemFav.name !== item.name
+          ),
+        };
+      }
+      return {
+        ...state,
+        favourites: [...state.favourites, { ...item, isFavourite: true }],
+      };
+    },
+    setQuantityOnFilteredList(state, action) {
+      const { name, quantity } = action.payload;
+
+      const modifiedList = state.filteredItems.map((item) => {
+        if (item.name === name) {
+          return { ...item, quantity };
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        filteredItems: modifiedList,
+        originalFilteredItems: modifiedList,
+      };
+    },
     setModalValue(state, action) {
       console.log(action.payload);
-
       return {
         ...state,
         modalValues: {
@@ -64,5 +126,13 @@ const menuSlice = createSlice({
     },
   },
 });
-export const { filterMenu, Sort, setModalValue,setHidden } = menuSlice.actions;
+export const {
+  filterMenu,
+  showDiscountedItems,
+  Sort,
+  setQuantityOnFilteredList,
+  setFavourites,
+  setModalValue,
+  setHidden,
+} = menuSlice.actions;
 export default menuSlice.reducer;

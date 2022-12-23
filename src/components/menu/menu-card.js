@@ -1,13 +1,18 @@
 import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { memo, useEffect, useState } from "react";
+import { AiFillHeart } from "react-icons/ai";
 import { FiShoppingCart } from "react-icons/fi";
 import { useInView } from "react-intersection-observer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart, selectCartItems } from "../../redux/cart/cart.toolkit";
+// import { addItemTocart } from "../../redux/cart/cart.actions";
+// import { selectCartItems } from "../../redux/cart/cart.selectors";
 import {
+  selectFavourites,
   setHidden,
   setModalValue,
+  setQuantityOnFilteredList,
 } from "../../redux/menu-items/menu-items.reducer";
-import { MenuModal } from "./menu-modal";
 const squareVariants = {
   visible: { opacity: 1, transition: { duration: 0.3 } },
   hidden: { opacity: 0 },
@@ -20,11 +25,38 @@ export const MenuCard = ({
   rating,
   source,
   discount,
+  persistedQuantity,
 }) => {
+  const [isFavourite, setIsFavourite] = useState(false);
+
+  const favourite = useSelector(selectFavourites);
+
+  useEffect(() => {
+    favourite.forEach((item) => {
+      if (item.name === name) {
+        setIsFavourite(item.isFavourite);
+      }
+    });
+  }, [favourite]);
+
+  const [quantity, setQuantity] = useState(0);
+  useEffect(() => {
+    setQuantity(persistedQuantity);
+    setcartCount(persistedQuantity);
+  }, []);
+  const [cartCount, setcartCount] = useState(0);
+  const productToAdd = { name, price, rating, source, discount, quantity };
   const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
   const closeModal = () => dispatch(setHidden(false));
   const controls = useAnimation();
   const [ref, inView] = useInView();
+  const addToCart = () => {
+    if (quantity <= 0) return;
+    dispatch(addItemToCart(cartItems, productToAdd));
+    console.log(quantity);
+    setcartCount(quantity);
+  };
   useEffect(() => {
     if (inView) {
       controls.start("visible");
@@ -34,14 +66,21 @@ export const MenuCard = ({
     }
   }, [controls, inView]);
 
-  console.log(rating);
   const discountAmount = price * (discount / 100);
   const newPrice = price - discountAmount;
   return (
     <motion.div
       onClick={() => {
         dispatch(
-          setModalValue({ name, price, rating, time: price, category, source })
+          setModalValue({
+            name,
+            price,
+            rating,
+            time: price,
+            category,
+            source,
+            quantity,
+          })
         );
         closeModal();
       }}
@@ -73,6 +112,11 @@ export const MenuCard = ({
         <p className="absolute bottom-0 left-[50%] translate-x-[-50%] text-xl text-white">
           {name}
         </p>
+        {isFavourite && (
+          <div className="w-6 h-6 absolute top-[4px] left-[-6px] rounded-[50%] bg-red-500 grid place-items-center text-white">
+            <AiFillHeart />
+          </div>
+        )}
       </div>
       <div className="flex justify-between items-end w-full h-12  ">
         <div className="flex flex-col justify-between items-start">
@@ -83,7 +127,7 @@ export const MenuCard = ({
               </span>
             ) : null}
             <span
-              className={`${discount && "text-gray-300 line-through text-xl"}`}
+              className={`${discount && "text-gray-300 line-through text-sm"}`}
             >
               ${price}
             </span>
@@ -98,15 +142,22 @@ export const MenuCard = ({
           onClick={(e) => e.stopPropagation()}
         >
           <motion.div
-           
+            onClick={() =>
+              setQuantity((prev) => {
+                if (prev <= 0) {
+                  return 0;
+                }
+                return prev - 1;
+              })
+            }
             whileTap={{ scale: 2.5 }}
             className="box-shadow flex justify-center items-center h-[32px] w-[32px]  hover:scale-105  bg-[#ff9f00] px-3 py-1 text-white rounded-[50%]"
           >
             -
           </motion.div>
-          <span className=" mx-3">{price}</span>
+          <span className=" mx-3">{quantity}</span>
           <motion.div
-           
+            onClick={() => setQuantity((prev) => prev + 1)}
             whileTap={{ scale: 2.5 }}
             className=" box-shadow flex justify-center items-center  hover:scale-105  bg-[#ff9f00] px-3 py-1 text-white rounded-[50%] h-[32px] w-[32px]"
           >
@@ -116,9 +167,18 @@ export const MenuCard = ({
 
         <motion.div
           whileTap={{ scale: 2.5 }}
-          className="customBtn flex justify-center items-center rounded-[50%]  bg-[#ff9f00]  hover:bg-[#ff9f00]  hover:scale-105 ease-linear w-12 h-12 "
-          onClick={(e) => e.stopPropagation()}
+          className=" relative flex justify-center items-center rounded-[50%]  bg-[#ff9f00]  hover:bg-[#ff9f00]  hover:scale-105 ease-linear w-12 h-12 "
+          onClick={(e) => {
+            e.stopPropagation();
+            addToCart();
+            dispatch(setQuantityOnFilteredList({ name, quantity }));
+          }}
         >
+          {cartCount > 0 && (
+            <div className="w-6 h-6 absolute top-[-4px] right-[-6px] rounded-[50%] bg-red-500 grid place-items-center text-white">
+              {cartCount}
+            </div>
+          )}
           <button className="font-bold  text-white ">
             <FiShoppingCart className="text-xl" />
           </button>
