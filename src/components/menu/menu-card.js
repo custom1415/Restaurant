@@ -58,7 +58,7 @@ export const MenuCard = ({
     if (quantity === persistedQuantity) return;
 
     if (quantity <= 0) return;
-    dispatch(addItemToCart(cartItems, productToAdd));
+    dispatch(addItemToCart({ cartItems, productToAdd }));
     dispatch(setQuantityOnFilteredList({ id, name, quantity }));
 
     console.log(quantity);

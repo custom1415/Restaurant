@@ -85,7 +85,7 @@ export const LandingPage = () => {
             repellat maiores ex!
           </p>
           <button className="bg-[#ff9f00] px-4 py-2  text-white rounded-xl">
-            Order Online
+            <Link to="menu">Order Online</Link>
           </button>
           <div>
             <div className="w-full flex justify-between  mt-4">

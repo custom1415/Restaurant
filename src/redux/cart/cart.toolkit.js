@@ -6,21 +6,22 @@ const cartSlice = createSlice({
     cartItems: [],
   },
   reducers: {
-    setCartItems: (state, action) => {
-      state.cartItems = action.payload;
-    },
     addItemToCart: (state, action) => {
-      const existingCartItem = state.cartItems.find(
-        (cartItem) => cartItem.name === action.payload.name
+      const { cartItems, productToAdd } = action.payload;
+      console.log(cartItems, productToAdd);
+      const existingCartItem = cartItems.find(
+        (cartItem) => cartItem.name === productToAdd.name
       );
       if (existingCartItem) {
-        state.cartItems = state.cartItems.map((cartItem) =>
-          cartItem.name === action.payload.name
-            ? { ...cartItem, quantity: action.payload.quantity }
+        state.cartItems = cartItems.map((cartItem) =>
+          cartItem.name === productToAdd.name
+            ? { ...cartItem, quantity: productToAdd.quantity }
             : cartItem
         );
+
+        console.log(state.cartItems);
       } else {
-        state.cartItems.push({ ...action.payload });
+        state.cartItems.push(productToAdd);
       }
     },
     removeItemFromCart: (state, action) => {
@@ -56,8 +57,9 @@ export const {
 
 export default cartSlice.reducer;
 
+export const selectCart = (state) => state.cart;
 export const selectCartItems = createSelector(
-  (state) => state.cart,
+  [selectCart],
   (cart) => cart.cartItems
 );
 
