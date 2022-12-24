@@ -70,7 +70,7 @@ export const LandingPage = () => {
         </div>
         <div className="flex justify-between items-center h-auto">
           <div className="md:w-1/2 flex flex-col justify-center items-start h-full mt-4 ">
-            <h1 className="  text-[#ff9f00] text-4xl scale-[1.3] origin-left font-bold font-['Playfair_Display'] mt-12">
+            <h1 className="  text-[#ff9f00] sm:text-6xl text-4xl scale-[1.3] origin-left font-bold font-['Playfair_Display'] mt-12">
               <span className="text-[#ff4444] font-['Playfair_Display'] ">
                 Come&nbsp;
               </span>
