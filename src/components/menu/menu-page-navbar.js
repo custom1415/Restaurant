@@ -23,7 +23,7 @@ export const MenuNav = () => {
         <AiOutlineHeart />
 
         {/* <RiSettingsLine className="ml-4 hover:text-gray-400" /> */}
-        <div className="flex items-center ml-4 sm:flex-row flex-col">
+        <div className="sm:flex hidden items-center ml-4 sm:flex-row ">
           <AiOutlineUser className="ml-2 hover:text-gray-400" />
           <p className="ml-2 hover:text-gray-400">Saroj</p>
           <BsChevronDown className="ml-2 hover:text-gray-400 " />
