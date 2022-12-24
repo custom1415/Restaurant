@@ -15,10 +15,11 @@ export const MenuModal = ({
   category,
   price,
   rating,
+  id,
   quantity,
   setModifiedQuantity,
 }) => {
-  const item = { source, name, category, price, rating, quantity };
+  const item = { source, name, category, price, rating, quantity, id };
   console.log(quantity);
   const dispatch = useDispatch();
   const closeModal = () => dispatch(setHidden(true));
@@ -27,7 +28,7 @@ export const MenuModal = ({
   const [isFavourite, setIsFavourite] = useState(false);
   useEffect(() => {
     favourite.forEach((item) => {
-      if (item.name === name) {
+      if (item.id === id) {
         setIsFavourite(item.isFavourite);
       }
     });

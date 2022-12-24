@@ -91,12 +91,13 @@ const menuSlice = createSlice({
     },
     setFavourites(state, action) {
       const { isFavourite, item } = action.payload;
+      console.log(isFavourite,item);
       console.log(action.payload);
       if (isFavourite) {
         return {
           ...state,
           favourites: [...state.favourites].filter(
-            (itemFav) => itemFav.name !== item.name
+            (itemFav) => itemFav.id !== item.id
           ),
         };
       }

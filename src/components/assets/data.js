@@ -167,7 +167,15 @@ const minDiscount = 10;
 const maxDiscount = 50;
 const randomIndex = Math.floor(Math.random() * fakearr.length);
 
-const modifiedFakearr = fakearr.map((item, index) => {
+const newModifiedArr = [
+  ...fakearr,
+  ...fakearr,
+  ...fakearr,
+  ...fakearr,
+  ...fakearr,
+];
+
+const modifiedFakearr = newModifiedArr.map((item, index) => {
   const modifiedItem = { ...item };
   if (Math.random() < 0.2) {
     modifiedItem.discount =

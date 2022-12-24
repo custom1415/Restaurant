@@ -8,14 +8,14 @@ import {
 export const MenuOptions = () => {
   const dispatch = useDispatch();
   return (
-    <div className="w-full min-h-28 flex sm:justify-between justify-center items-center  p-4 ">
-      <h3 className="sm:text-2xl text-xl md:text-3xl text-[#ff4444] sm:block hidden  ">
+    <div className="w-full min-h-28 flex justify-between items-center  p-4 ">
+      <h3 className="sm:text-2xl text-xl md:text-3xl text-[#ff4444]   ">
         Find the best food &nbsp;🍳
       </h3>
-      <div className="flex items-center w-50">
+      <div className="flex items-center">
         <div className="relative">
           <select
-            className="flex  text-sm px-4 py-2 m-3 appearance-none pr-8 bg-gray-300"
+            className="flex  text-sm sm:w-50 w-36 px-4 py-2 m-3 appearance-none pr-8 bg-gray-300"
             onChange={(e) => {
               if (e.target.value === "discount") {
                 dispatch(showDiscountedItems());
@@ -39,12 +39,12 @@ export const MenuOptions = () => {
           </select>
           <BsChevronDown className=" absolute top-[50%] translate-y-[-50%] right-5" />
         </div>
-        <div className=" relative">
+        {/* <div className=" relative">
           <select className="flex text-sm px-4 py-2 ml-3 appearance-none pr-8 bg-gray-300">
             <option className=" ">Recently added</option>
           </select>
           <BsChevronDown className=" absolute top-[50%] translate-y-[-50%] right-2" />
-        </div>
+        </div> */}
       </div>
     </div>
   );

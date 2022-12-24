@@ -34,7 +34,8 @@ export const MenuCard = ({
 
   useEffect(() => {
     favourite.forEach((item) => {
-      if (item.name === name) {
+      console.log(item);
+      if (item.id === id) {
         setIsFavourite(item.isFavourite);
       }
     });
@@ -57,7 +58,6 @@ export const MenuCard = ({
     console.log(quantity, persistedQuantity);
     if (quantity === persistedQuantity) return;
 
-    if (quantity <= 0) return;
     dispatch(addItemToCart({ cartItems, productToAdd }));
     dispatch(setQuantityOnFilteredList({ id, name, quantity }));
 
@@ -89,6 +89,16 @@ export const MenuCard = ({
   // initial="hidden"
   // variants={squareVariants}
 
+  const handleQuantityChange = (e) => {
+    if (e.target.dataset.name === "add") setQuantity(quantity + 1);
+    if (e.target.dataset.name === "remove") {
+      if (quantity === 0) {
+        setQuantity(0);
+        return;
+      }
+      setQuantity(quantity - 1);
+    }
+  };
   return (
     <motion.div
       onClick={() => {
@@ -101,6 +111,7 @@ export const MenuCard = ({
             category,
             source,
             quantity,
+            id,
           })
         );
         closeModal();
@@ -130,7 +141,7 @@ export const MenuCard = ({
           {name}
         </p>
         {isFavourite && (
-          <div className="w-6 h-6 absolute top-[4px] left-[-6px] rounded-[50%] bg-red-500 grid place-items-center text-white">
+          <div className="w-6 h-6 absolute top-[8px] left-[8px] rounded-[50%] bg-red-500 grid place-items-center text-white">
             <AiFillHeart />
           </div>
         )}
@@ -159,14 +170,8 @@ export const MenuCard = ({
           onClick={(e) => e.stopPropagation()}
         >
           <motion.div
-            onClick={() =>
-              setQuantity((prev) => {
-                if (prev <= 0) {
-                  return 0;
-                }
-                return prev - 1;
-              })
-            }
+            data-name="remove"
+            onClick={handleQuantityChange}
             whileTap={{ scale: 2.5 }}
             className="box-shadow flex justify-center items-center h-[32px] w-[32px]  hover:scale-105  bg-[#ff9f00] px-3 py-1 text-white rounded-[50%]"
           >
@@ -174,7 +179,8 @@ export const MenuCard = ({
           </motion.div>
           <span className=" mx-3">{quantity}</span>
           <motion.div
-            onClick={() => setQuantity((prev) => prev + 1)}
+            data-name="add"
+            onClick={handleQuantityChange}
             whileTap={{ scale: 2.5 }}
             className=" box-shadow flex justify-center items-center  hover:scale-105  bg-[#ff9f00] px-3 py-1 text-white rounded-[50%] h-[32px] w-[32px]"
           >

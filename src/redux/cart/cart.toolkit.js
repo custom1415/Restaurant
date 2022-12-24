@@ -25,16 +25,17 @@ const cartSlice = createSlice({
       }
     },
     removeItemFromCart: (state, action) => {
-      const existingCartItem = state.cartItems.find(
-        (cartItem) => cartItem.id === action.payload.id
+      const { cartItems, productToAdd } = action.payload;
+      const existingCartItem = cartItems.find(
+        (cartItem) => cartItem.id === productToAdd.id
       );
       if (existingCartItem.quantity === 1) {
-        state.cartItems = state.cartItems.filter(
-          (cartItem) => cartItem.id !== action.payload.id
+        state.cartItems = cartItems.filter(
+          (cartItem) => cartItem.id !== productToAdd.id
         );
       } else {
-        state.cartItems = state.cartItems.map((cartItem) =>
-          cartItem.id === action.payload.id
+        state.cartItems = cartItems.map((cartItem) =>
+          cartItem.id === productToAdd.id
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         );

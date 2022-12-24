@@ -15,7 +15,7 @@ import {
 
 export const MenuPage = () => {
   const selectModalVisibilty = useSelector(selectHidden);
-  const { name, price, time, category, source, quantity } =
+  const { name, price, time, category, source, quantity, id } =
     useSelector(selectModalValues);
   const [modifiedQuantity, setmodifiedQuantity] = useState(quantity);
   const changeQuantity = useMemo((val) => {
@@ -40,6 +40,7 @@ export const MenuPage = () => {
     >
       {!selectModalVisibilty && (
         <MenuModal
+          id={id}
           name={name}
           price={price}
           time={time}
