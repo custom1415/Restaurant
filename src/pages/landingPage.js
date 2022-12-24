@@ -70,15 +70,13 @@ export const LandingPage = () => {
         </div>
         <div className="flex justify-between items-center h-auto">
           <div className="md:w-1/2 flex flex-col justify-center items-start h-full mt-4 ">
-            <h1 className="  text-[#ff9f00] sm:text-6xl text-4xl scale-[1.3] origin-left font-bold font-['Playfair_Display'] mt-12">
+            <h1 className="  text-[#ff9f00] sm:text-6xl text-4xl sm:scale-[1] scale-[1.3] origin-left font-bold font-['Playfair_Display'] mt-12">
               <span className="text-[#ff4444] font-['Playfair_Display'] ">
                 Come&nbsp;
               </span>
               Hungry
               <br /> Leave&nbsp;
-              <span className=" font-['Playfair_Display']  text-[#ff4444]">
-                Happy
-              </span>
+              <span className=" Playfair  text-[#ff4444]">Happy</span>
             </h1>
             <p className="my-6 text-sm text-gray-500">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo

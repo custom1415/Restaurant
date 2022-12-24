@@ -21,7 +21,21 @@
   box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
 } */
 
+@font-face {
+  font-family: "Playfair Display";
+  src: local("Playfair Display"),
+    url("./components/assets/fonts/Playfair/PlayfairDisplay-VariableFont_wght.ttf")
+      format("truetype");
+  font-weight: bold;
+}
+.Playfair {
+  font-family: "Playfair Display";
+}
 
-body{
-  
+@font-face {
+  font-family: "Typo Round Regular Demo";
+  src: local("Typo Round Regular Demo"),
+    url("./components/assets/fonts/Typo/Typo_Round_Regular_Demo.otf")
+      format("opentype");
+  font-weight: bold;
 }
