@@ -1,5 +1,5 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useState, useEffect, useMemo } from "react";
+import { motion } from "framer-motion";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 import {
   MenuCategory,
@@ -21,6 +21,11 @@ export const MenuPage = () => {
   const changeQuantity = useMemo((val) => {
     return setmodifiedQuantity(val);
   }, []);
+  const scrollRef = useRef(null);
+  useEffect(() => {
+    console.log(scrollRef.current);
+  }, []);
+
   useEffect(() => {
     setmodifiedQuantity(quantity);
   }, [quantity]);

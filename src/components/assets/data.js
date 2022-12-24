@@ -173,7 +173,7 @@ const modifiedFakearr = fakearr.map((item, index) => {
     modifiedItem.discount =
       Math.floor(Math.random() * (maxDiscount - minDiscount + 1)) + minDiscount;
   }
-
+  modifiedItem.id = Math.random();
   modifiedItem.price =
     Math.floor(Math.random() * (maxPrice - minPrice + 1)) + minPrice;
   modifiedItem.rating =

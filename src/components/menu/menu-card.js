@@ -1,5 +1,5 @@
 import { motion, useAnimation } from "framer-motion";
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { FiShoppingCart } from "react-icons/fi";
 import { useInView } from "react-intersection-observer";
@@ -13,10 +13,10 @@ import {
   setModalValue,
   setQuantityOnFilteredList,
 } from "../../redux/menu-items/menu-items.reducer";
-const squareVariants = {
-  visible: { opacity: 1, transition: { duration: 0.3 } },
-  hidden: { opacity: 0 },
-};
+// const squareVariants = {
+//   visible: { opacity: 1, transition: { duration: 0.3 } },
+//   hidden: { opacity: 0 },
+// };
 
 export const MenuCard = ({
   name,
@@ -26,6 +26,7 @@ export const MenuCard = ({
   source,
   discount,
   persistedQuantity,
+  id,
 }) => {
   const [isFavourite, setIsFavourite] = useState(false);
 
@@ -40,34 +41,54 @@ export const MenuCard = ({
   }, [favourite]);
 
   const [quantity, setQuantity] = useState(0);
+
+  // States
+  const [cartCount, setcartCount] = useState(0);
+  const productToAdd = { name, price, rating, source, discount, quantity, id };
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+  const closeModal = () => dispatch(setHidden(false));
+  // const controls = useAnimation();
+  // const [ref, inView] = useInView();
+  //
+  //
+  const addToCart = (e) => {
+    e.stopPropagation();
+    console.log(quantity, persistedQuantity);
+    if (quantity === persistedQuantity) return;
+
+    if (quantity <= 0) return;
+    dispatch(addItemToCart(cartItems, productToAdd));
+    dispatch(setQuantityOnFilteredList({ id, name, quantity }));
+
+    console.log(quantity);
+    setcartCount(quantity);
+  };
+  //
+  //
   useEffect(() => {
     setQuantity(persistedQuantity);
     setcartCount(persistedQuantity);
   }, []);
-  const [cartCount, setcartCount] = useState(0);
-  const productToAdd = { name, price, rating, source, discount, quantity };
-  const dispatch = useDispatch();
-  const cartItems = useSelector(selectCartItems);
-  const closeModal = () => dispatch(setHidden(false));
-  const controls = useAnimation();
-  const [ref, inView] = useInView();
-  const addToCart = () => {
-    if (quantity <= 0) return;
-    dispatch(addItemToCart(cartItems, productToAdd));
-    console.log(quantity);
-    setcartCount(quantity);
-  };
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-    if (!inView) {
-      controls.start("hidden");
-    }
-  }, [controls, inView]);
-
+  //
+  // useEffect(() => {
+  //   if (inView) {
+  //     controls.start("visible");
+  //   }
+  //   if (!inView) {
+  //     controls.start("hidden");
+  //   }
+  // }, [controls, inView]);
+  //
+  //
   const discountAmount = price * (discount / 100);
   const newPrice = price - discountAmount;
+
+  // ref={ref}
+  // animate={controls}
+  // initial="hidden"
+  // variants={squareVariants}
+
   return (
     <motion.div
       onClick={() => {
@@ -84,10 +105,6 @@ export const MenuCard = ({
         );
         closeModal();
       }}
-      ref={ref}
-      animate={controls}
-      initial="hidden"
-      variants={squareVariants}
       className="relative w-full h-auto px-6 py-4 snap-center snap-always flex flex-col items-start justify-between rounded-3xl bg-[#f4f9fb] transition ease-linear duration-300 only:"
     >
       {/* <MenuModal
@@ -168,11 +185,7 @@ export const MenuCard = ({
         <motion.div
           whileTap={{ scale: 2.5 }}
           className=" relative flex justify-center items-center rounded-[50%]  bg-[#ff9f00]  hover:bg-[#ff9f00]  hover:scale-105 ease-linear w-12 h-12 "
-          onClick={(e) => {
-            e.stopPropagation();
-            addToCart();
-            dispatch(setQuantityOnFilteredList({ name, quantity }));
-          }}
+          onClick={addToCart}
         >
           {cartCount > 0 && (
             <div className="w-6 h-6 absolute top-[-4px] right-[-6px] rounded-[50%] bg-red-500 grid place-items-center text-white">

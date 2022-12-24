@@ -1,17 +1,14 @@
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { RiSettingsLine } from "react-icons/ri";
 import { BsChevronDown } from "react-icons/bs";
-import { AiOutlineUser } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import {
   showDiscountedItems,
   Sort,
-} from "../../redux/menu-items/menu-items.reducer.re";
+} from "../../redux/menu-items/menu-items.reducer";
 
 export const MenuOptions = () => {
   const dispatch = useDispatch();
   return (
-    <div className="w-full h-28 flex sm:justify-between justify-center items-center  p-4 ">
+    <div className="w-full min-h-28 flex sm:justify-between justify-center items-center  p-4 ">
       <h3 className="sm:text-2xl text-xl md:text-3xl text-[#ff4444] sm:block hidden  ">
         Find the best food &nbsp;🍳
       </h3>

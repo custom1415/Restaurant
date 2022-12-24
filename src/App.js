@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { Contact } from "./components/contact/contact-form";
 function App() {
   const location = useLocation();
+  
   return (
     <Routes key={location.pathname} location={location}>
       <Route path="/" element={<NavigationPage />}>
