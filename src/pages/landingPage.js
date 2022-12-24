@@ -7,6 +7,56 @@ import Fries from "../components/assets/friesrem.png";
 import { FaHamburger } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+// {!Hidden && (
+//   <div className="w-screen h-screen fixed bg-white z-40 top-0 left-0 lg:hidden flex justify-center items-center">
+//     <div className="flex flex-col w-[80%] justify-center items-center">
+//       <Link
+//         onClick={() => setHidden(true)}
+//         className="text-4xl my-6 text-[#ff9f00]"
+//         to="/"
+//       >
+//         Home
+//       </Link>
+//       <Link
+//         onClick={() => setHidden(true)}
+//         className="text-4xl my-6 text-[#ff9f00]"
+//         to="menu"
+//       >
+//         Menu
+//       </Link>
+//       <Link
+//         onClick={() => setHidden(true)}
+//         className="text-4xl my-6 text-[#ff9f00]"
+//         to="reservation"
+//       >
+//         Reservation
+//       </Link>
+//       <Link
+//         onClick={() => setHidden(true)}
+//         className="text-4xl my-6 text-[#ff9f00]"
+//         to="contact"
+//       >
+//         Contact
+//       </Link>
+//       <Link
+//         onClick={() => setHidden(true)}
+//         className="text-4xl my-6 text-[#ff9f00]"
+//         to="about"
+//       >
+//         About us
+//       </Link>
+//       <Link
+//         onClick={() => setHidden(true)}
+//         className="text-4xl my-6 text-[#ff9f00]"
+//         to="instagram"
+//       >
+//         Instagram
+//       </Link>
+//     </div>
+//   </div>
+// )}
+
 export const LandingPage = () => {
   const [Hidden, setHidden] = useState(true);
   return (
@@ -17,54 +67,6 @@ export const LandingPage = () => {
           onClick={() => setHidden(!Hidden)}
           className="lg:hidden  text-3xl cursor-pointer text-[#ff4444] relative z-50"
         />
-        {!Hidden && (
-          <div className="w-screen h-screen fixed bg-white z-40 top-0 left-0 lg:hidden flex justify-center items-center">
-            <div className="flex flex-col w-[80%] justify-center items-center">
-              <Link
-                onClick={() => setHidden(true)}
-                className="text-4xl my-6 text-[#ff9f00]"
-                to="/"
-              >
-                Home
-              </Link>
-              <Link
-                onClick={() => setHidden(true)}
-                className="text-4xl my-6 text-[#ff9f00]"
-                to="menu"
-              >
-                Menu
-              </Link>
-              <Link
-                onClick={() => setHidden(true)}
-                className="text-4xl my-6 text-[#ff9f00]"
-                to="reservation"
-              >
-                Reservation
-              </Link>
-              <Link
-                onClick={() => setHidden(true)}
-                className="text-4xl my-6 text-[#ff9f00]"
-                to="contact"
-              >
-                Contact
-              </Link>
-              <Link
-                onClick={() => setHidden(true)}
-                className="text-4xl my-6 text-[#ff9f00]"
-                to="about"
-              >
-                About us
-              </Link>
-              <Link
-                onClick={() => setHidden(true)}
-                className="text-4xl my-6 text-[#ff9f00]"
-                to="instagram"
-              >
-                Instagram
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
       <div className="flex justify-between items-center h-auto">
         <div className="md:w-1/2 flex flex-col justify-center items-start h-full mt-4 ">

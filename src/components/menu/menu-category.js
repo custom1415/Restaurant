@@ -30,7 +30,7 @@ export const MenuCategory = () => {
                 name === activeCategory
                   ? "bg-[#ff9000] text-white"
                   : "text-gray-500 border-2 border-gray-500"
-              }   w-[400px]  rounded-[27px] p-4 m-1 snap-start snap-always flex items-center justify-between hover:bg-slate-200 transition ease-linear duration-300`}
+              }   w-[400px]  rounded-[27px] p-4 m-1 snap-start snap-always flex items-center justify-between transition ease-linear duration-300`}
               onClick={() => {
                 dispatch(filterMenu(name));
                 dispatch(setActiveCategory(name));
