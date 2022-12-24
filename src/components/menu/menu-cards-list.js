@@ -2,11 +2,15 @@ import { memo } from "react";
 import { MenuCard } from "./menu-card";
 // import { Arr } from "../assets/data";
 import { useSelector } from "react-redux";
-import { selectMenu } from "../../redux/menu-items/menu-items.reducer";
+import { selectActiveCategory, selectMenu } from "../../redux/menu-items/menu-items.reducer";
+import { selectCartItems } from "../../redux/cart/cart.toolkit";
 export const MenuCardsList = memo(() => {
   const Arr = useSelector(selectMenu);
-  const activeCategory = useSelector((state) => state.menu.activeCategory);
+  const activeCategory = useSelector(selectActiveCategory);
+  const cartItems = useSelector(selectCartItems);
   console.log(activeCategory);
+
+
   return (
     <div
       className="
@@ -21,7 +25,13 @@ export const MenuCardsList = memo(() => {
           return category.name === activeCategory;
         }
       }).map((item, i) => {
-        const { name, price, rating, discount, quantity, id } = item;
+        const { name, price, rating, discount, id } = item;
+        const getQty = cartItems.find((item) => item.id === id);
+        let quantity = 0;
+        if (getQty) {
+          const { quantity: qty } = getQty;
+          quantity = qty;
+        }
         /* let randomNumber = (Math.random() * 4 + 1).toFixed();
         let randomNumber2 = (Math.random() * 50 + 1).toFixed(); */
 
@@ -44,7 +54,7 @@ export const MenuCardsList = memo(() => {
             category={name}
             source={source}
             discount={checkDiscount}
-            persistedQuantity={checkQuantity}
+            persistedQuantity={quantity}
           />
         );
       })}

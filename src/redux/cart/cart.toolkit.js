@@ -8,21 +8,40 @@ const cartSlice = createSlice({
   reducers: {
     addItemToCart: (state, action) => {
       const { cartItems, productToAdd } = action.payload;
-      console.log(cartItems, productToAdd);
+      // console.log(cartItems, productToAdd);
+      // const existingCartItem = cartItems.find(
+      //   (cartItem) => cartItem.id === productToAdd.id
+      // );
+      // if (existingCartItem) {
+      //   state.cartItems = cartItems.map((cartItem) =>
+      //     cartItem.id === productToAdd.id
+      //       ? { ...cartItem, quantity: productToAdd.quantity }
+      //       : cartItem
+      //   );
+
+      //   console.log(state.cartItems);
+      // } else {
+      //   state.cartItems.push(productToAdd);
+      // }
+      let newCartItems;
+
       const existingCartItem = cartItems.find(
-        (cartItem) => cartItem.name === productToAdd.name
+        (cartItem) => cartItem.id === productToAdd.id
       );
       if (existingCartItem) {
-        state.cartItems = cartItems.map((cartItem) =>
-          cartItem.name === productToAdd.name
+        newCartItems = cartItems.map((cartItem) =>
+          cartItem.id === productToAdd.id
             ? { ...cartItem, quantity: productToAdd.quantity }
             : cartItem
         );
-
-        console.log(state.cartItems);
       } else {
-        state.cartItems.push(productToAdd);
+        newCartItems = [...cartItems, { ...productToAdd }];
       }
+
+      return {
+        ...state,
+        cartItems: newCartItems,
+      };
     },
     removeItemFromCart: (state, action) => {
       const { cartItems, productToAdd } = action.payload;

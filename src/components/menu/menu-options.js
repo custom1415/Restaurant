@@ -15,7 +15,7 @@ export const MenuOptions = () => {
       <div className="flex items-center">
         <div className="relative">
           <select
-            className="flex  text-sm sm:w-50 w-36 px-4 py-2 m-3 appearance-none pr-8 bg-gray-300"
+            className="flex  text-sm sm:w-48 supersm:w-36 w-32 supersm:px-4 px-3 py-2 m-2 appearance-none pr-8 bg-gray-300"
             onChange={(e) => {
               if (e.target.value === "discount") {
                 dispatch(showDiscountedItems());

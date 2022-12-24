@@ -165,7 +165,7 @@ const minRating = 1;
 const maxRating = 5;
 const minDiscount = 10;
 const maxDiscount = 50;
-const randomIndex = Math.floor(Math.random() * fakearr.length);
+
 
 const newModifiedArr = [
   ...fakearr,
@@ -174,6 +174,7 @@ const newModifiedArr = [
   ...fakearr,
   ...fakearr,
 ];
+
 
 const modifiedFakearr = newModifiedArr.map((item, index) => {
   const modifiedItem = { ...item };

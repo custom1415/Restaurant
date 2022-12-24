@@ -62,7 +62,7 @@ export const LandingPage = () => {
       )}
       <div className="lg:w-[92vw] h-auto  py-9 lg:px-8 px-12">
         <div className="flex justify-between items-center ">
-          <h1 className="text-4xl">Bla Bla</h1>
+          <h1 className="text-2xl">Bla Bla</h1>
           <FaHamburger
             onClick={() => setHidden(!Hidden)}
             className="lg:hidden  text-2xl cursor-pointer text-[#ff4444] relative z-50"
@@ -70,7 +70,7 @@ export const LandingPage = () => {
         </div>
         <div className="flex justify-between items-center h-auto">
           <div className="md:w-1/2 flex flex-col justify-center items-start h-full mt-4 ">
-            <h1 className="  text-[#ff9f00] sm:text-6xl text-4xl sm:scale-[1] scale-[1.3] origin-left font-bold font-['Playfair_Display'] mt-12">
+            <h1 className="  text-[#ff9f00] sm:text-6xl text-4xl sm:scale-[1] scale-[1.1] origin-left font-bold font-['Playfair_Display'] mt-12">
               <span className="text-[#ff4444] font-['Playfair_Display'] ">
                 Come&nbsp;
               </span>

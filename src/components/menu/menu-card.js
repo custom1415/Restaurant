@@ -41,10 +41,10 @@ export const MenuCard = ({
     });
   }, [favourite]);
 
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(persistedQuantity);
 
   // States
-  const [cartCount, setcartCount] = useState(0);
+  const [cartCount, setcartCount] = useState(persistedQuantity);
   const productToAdd = { name, price, rating, source, discount, quantity, id };
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
@@ -58,18 +58,15 @@ export const MenuCard = ({
     console.log(quantity, persistedQuantity);
     if (quantity === persistedQuantity) return;
 
+    // dispatch(setQuantityOnFilteredList({ id, name, quantity }));
     dispatch(addItemToCart({ cartItems, productToAdd }));
-    dispatch(setQuantityOnFilteredList({ id, name, quantity }));
 
     console.log(quantity);
     setcartCount(quantity);
   };
   //
   //
-  useEffect(() => {
-    setQuantity(persistedQuantity);
-    setcartCount(persistedQuantity);
-  }, []);
+
   //
   // useEffect(() => {
   //   if (inView) {

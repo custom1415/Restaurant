@@ -18,6 +18,10 @@ export const selectFavourites = createSelector(
   [selectMenuReducer],
   (state) => state.favourites
 );
+export const selectActiveCategory = createSelector(
+  [selectMenuReducer],
+  (state) => state.activeCategory
+);
 
 // export const selectQty = createSelector([selectMenuReducer], (state) => {
 
@@ -91,7 +95,7 @@ const menuSlice = createSlice({
     },
     setFavourites(state, action) {
       const { isFavourite, item } = action.payload;
-      console.log(isFavourite,item);
+      console.log(isFavourite, item);
       console.log(action.payload);
       if (isFavourite) {
         return {
