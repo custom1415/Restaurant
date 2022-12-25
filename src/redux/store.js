@@ -10,7 +10,7 @@ import sidebarToolkit from "./sidebar/sidebar.toolkit";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["sidebar"],
+  blacklist: ["sidebar","menu"],
 };
 
 const rootReducer = combineReducers({

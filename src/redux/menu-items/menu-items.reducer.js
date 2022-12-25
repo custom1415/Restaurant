@@ -23,7 +23,6 @@ export const selectActiveCategory = createSelector(
   (state) => state.activeCategory
 );
 
-
 // export const selectQty = createSelector([selectMenuReducer], (state) => {
 
 const initialState = {
@@ -123,29 +122,29 @@ const menuSlice = createSlice({
       };
     },
 
-    setQuantityOnFilteredList(state, action) {
-      const { id, name, quantity } = action.payload;
+    // setQuantityOnFilteredList(state, action) {
+    //   const { id, name, quantity } = action.payload;
 
-      const modifiedList = [...state.originalItems].map((item) => {
-        if (item.id === id) {
-          return { ...item, quantity };
-        }
-        return item;
-      });
-      let newList;
-      if (modifiedList.length === state.items.length) {
-        newList = modifiedList;
-      } else if (name === "All") {
-        newList = modifiedList;
-      } else {
-        newList = modifiedList.filter((item) => item.name === name);
-      }
-      return {
-        ...state,
-        filteredItems: newList,
-        originalItems: modifiedList,
-      };
-    },
+    //   const modifiedList = [...state.originalItems].map((item) => {
+    //     if (item.id === id) {
+    //       return { ...item, quantity };
+    //     }
+    //     return item;
+    //   });
+    //   let newList;
+    //   if (modifiedList.length === state.items.length) {
+    //     newList = modifiedList;
+    //   } else if (name === "All") {
+    //     newList = modifiedList;
+    //   } else {
+    //     newList = modifiedList.filter((item) => item.name === name);
+    //   }
+    //   return {
+    //     ...state,
+    //     filteredItems: newList,
+    //     originalItems: modifiedList,
+    //   };
+    // },
     setActiveCategory(state, action) {
       return {
         ...state,
