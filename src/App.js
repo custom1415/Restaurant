@@ -6,7 +6,7 @@ import { LandingPage } from "./pages/landingPage";
 import { MenuPage } from "./pages/menuPage";
 import { AnimatePresence } from "framer-motion";
 import { Contact } from "./components/contact/contact-form";
-import { CheckoutPage } from "./pages/checkoutPage";
+import { CartPage } from "./pages/cartPage";
 function App() {
   const location = useLocation();
 
@@ -16,7 +16,7 @@ function App() {
         <Route index element={<LandingPage />} />
         <Route path="menu" element={<MenuPage />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="checkout" element={<CheckoutPage />} />
+        <Route path="cart" element={<CartPage />} />
       </Route>
     </Routes>
   );

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 export const SidebarWrapper = styled.aside`
   position: fixed;
-  z-index: 50;
+  z-index: 2000;
   top: 0;
   right: 0;
   height: 100%;
@@ -13,6 +13,16 @@ export const SidebarWrapper = styled.aside`
     ${(props) => (props.className === "open" ? "0" : "100%")}
   );
   transition: transform 0.3s ease-out;
+`;
+export const Overlay = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  transition: 0.3s;
+  background-color: rgba(17, 17, 17, 0.7);
 `;
 
 export const SidebarHeader = styled.header`
@@ -38,11 +48,15 @@ export const CartItem = styled.div`
   align-items: center;
   padding: 1rem;
   border-bottom: 1px solid #eee;
+  height: 100px;
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 export const ItemImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 1rem;
@@ -53,13 +67,13 @@ export const ItemDetails = styled.div`
 `;
 
 export const ItemName = styled.h2`
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 `;
 
 export const ItemQuantity = styled.p`
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #666;
 `;
 
@@ -96,6 +110,15 @@ export const ButtonWrapper = styled.div`
   justify-content: space-between;
   & > *:nth-child(2) {
     margin-left: 2rem;
+    color: white;
+
+    background-color: #ff4444;
+  }
+  & > *:nth-child(1) {
+    color: black;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 0.5px solid gray;
   }
   margin-top: 1em;
 `;
@@ -108,8 +131,7 @@ export const StyledLink = styled(Link)`
 export const Button = styled.button`
   display: block;
   width: 100%;
-  background: #333;
-  color: white;
+
   font-size: 1rem;
   font-weight: bold;
   padding: 0.75rem 1.25rem;

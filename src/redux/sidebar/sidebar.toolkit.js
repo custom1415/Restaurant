@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { produce } from "immer";
+
 
 const selectSidebar = (state) => state.sidebar;
 export const selectSidebarState = createSelector(
@@ -17,7 +17,7 @@ const searchSlice = createSlice({
       return {
         ...state,
 
-        isSidebarHidden: action.payload,
+        isSidebarHidden: !state.isSidebarHidden,
       };
     },
   },

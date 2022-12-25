@@ -39,3 +39,7 @@
       format("opentype");
   font-weight: bold;
 }
+
+* {
+  user-select: none;
+}

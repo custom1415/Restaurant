@@ -23,6 +23,7 @@ export const selectActiveCategory = createSelector(
   (state) => state.activeCategory
 );
 
+
 // export const selectQty = createSelector([selectMenuReducer], (state) => {
 
 const initialState = {

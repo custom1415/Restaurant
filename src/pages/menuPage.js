@@ -13,7 +13,9 @@ import {
   selectHidden,
   selectModalValues,
 } from "../redux/menu-items/menu-items.reducer";
+import { selectSidebarState } from "../redux/sidebar/sidebar.toolkit";
 export const MenuPage = () => {
+  const sidebarState = useSelector(selectSidebarState);
   const selectModalVisibilty = useSelector(selectHidden);
   const { name, price, time, category, source, quantity, id } =
     useSelector(selectModalValues);
@@ -36,11 +38,9 @@ export const MenuPage = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="flex flex-col lg:w-[92vw] w-screen h-auto overflow-y-scroll "
+      className="flex flex-col lg:w-[92vw] w-screen min-h-screen h-auto overflow-y-scroll "
     >
-    
-      <CartSidebar />
-
+      <CartSidebar sidebarState={sidebarState} />
       {!selectModalVisibilty && (
         <MenuModal
           id={id}
@@ -56,7 +56,6 @@ export const MenuPage = () => {
       <MenuNav />
       <MenuOptions />
       <MenuCategory />
-
       <MenuCardsList setmodifiedQuantity={changeQuantity} />
     </motion.div>
   );

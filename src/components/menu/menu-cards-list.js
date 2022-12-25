@@ -7,6 +7,7 @@ import {
   selectMenu,
 } from "../../redux/menu-items/menu-items.reducer";
 import { selectCartItems } from "../../redux/cart/cart.toolkit";
+import { Footer } from "../footer/footer";
 // other imports here
 
 export const MenuCardsList = memo(() => {
@@ -60,8 +61,11 @@ export const MenuCardsList = memo(() => {
   );
 
   return (
-    <div className="w-full h-auto p-6 snap-y snap-mandatory grid place-content-center place-items-center gap-7 grid-rows-max sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-1">
-      {filteredArr.map(renderMenuCard)}
-    </div>
+    <>
+      <div className="w-full h-auto p-6 snap-y snap-mandatory grid place-content-center place-items-center gap-7 grid-rows-max sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-1 ">
+        {filteredArr.map(renderMenuCard)}
+      </div>
+      <Footer />
+    </>
   );
 });

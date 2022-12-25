@@ -1,7 +1,11 @@
 import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { selectCartItems } from "../redux/cart/cart.toolkit";
-export const CheckoutPage = () => {
+import {
+  selectCartCount,
+  selectCartItems,
+  selectCartTotal,
+} from "../redux/cart/cart.toolkit";
+export const CartPage = () => {
   const CartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
 
@@ -11,6 +15,8 @@ export const CheckoutPage = () => {
 
     console.log("hascascscascasci");
   };
+  const cartCount = useSelector(selectCartCount);
+  const cartTotal = useSelector(selectCartTotal);
   return (
     <>
       <div className="lg:w-[92vw] w-screen h-screen overflow-y-scroll ">
@@ -18,30 +24,44 @@ export const CheckoutPage = () => {
           <div className="w-[70%] bg-white px-10 py-10">
             <div className="flex justify-between border-b pb-8">
               <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-              <h2 className="font-semibold text-2xl">3 Items</h2>
+              <h2 className="font-semibold text-2xl">
+                {CartItems.length} Items
+              </h2>
             </div>
             <div className="overflow-y-scroll max-h-screen">
               <div className="flex mt-10 mb-5">
                 <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
                   Product Details
                 </h3>
-                <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+                <h3 className="font-semibold text-gray-600 text-xs uppercase w-1/5 text-center">
                   Quantity
                 </h3>
-                <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+                <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">
                   Price
                 </h3>
-                <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+                <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">
                   Total
                 </h3>
               </div>
 
               {CartItems.map((item) => {
-                const { source, id, name, price, quantity, rating, category } =
-                  item;
+                const {
+                  source,
+                  id,
+                  name,
+                  price,
+                  quantity,
+                  rating,
+                  category,
+                  discount,
+                } = item;
+
+                const discountAmount = price * (discount / 100);
+                const newPrice = price - discountAmount;
+
                 return (
                   <div
-                    className="flex items-center hover:bg-gray-100   py-5"
+                    className="flex items-center hover:bg-gray-100 cursor-pointer  py-5"
                     key={id}
                   >
                     <div className="flex w-2/5">
@@ -75,7 +95,7 @@ export const CheckoutPage = () => {
                         onChange={() => {}}
                         className="mx-2 border text-center w-8"
                         type="text"
-                        value="1"
+                        value={quantity}
                       />
 
                       <svg
@@ -86,10 +106,10 @@ export const CheckoutPage = () => {
                       </svg>
                     </div>
                     <span className="text-center w-1/5 font-semibold text-sm">
-                      $40.00
+                      Rs {discount ? newPrice.toFixed() : price}
                     </span>
                     <span className="text-center w-1/5 font-semibold text-sm">
-                      $40.00
+                      Rs {price * quantity}
                     </span>
                   </div>
                 );
@@ -98,10 +118,10 @@ export const CheckoutPage = () => {
 
             <div
               onClick={handleClick}
-              className="flex font-semibold text-indigo-600 text-sm mt-10"
+              className="flex font-semibold text-[#ff4444] text-sm mt-10"
             >
               <svg
-                className="fill-current mr-2 text-indigo-600 w-4"
+                className="fill-current mr-2 text-[#ff4444] w-4"
                 viewBox="0 0 448 512"
               >
                 <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
@@ -115,23 +135,26 @@ export const CheckoutPage = () => {
               Order Summary
             </h1>
             <div className="flex justify-between mt-10 mb-5">
-              <span className="font-semibold text-sm uppercase">Items 3</span>
-              <span className="font-semibold text-sm">590$</span>
+              <span className="font-semibold text-sm uppercase">
+                Items - {cartCount}
+              </span>
+              <span className="font-semibold text-sm">Rs {cartTotal}</span>
             </div>
-            <div>
+            {/* <div>
               <label className="font-medium inline-block mb-3 text-sm uppercase">
                 Shipping
               </label>
               <select className="block p-2 text-gray-600 w-full text-sm">
                 <option>Standard shipping - $10.00</option>
               </select>
-            </div>
+            </div> */}
+            
             <div className="py-10">
               <label
                 htmlFor="promo"
                 className="font-semibold inline-block mb-3 text-sm uppercase"
               >
-                Promo Code
+                Discount Code
               </label>
               <input
                 onChange={() => {}}
@@ -141,15 +164,15 @@ export const CheckoutPage = () => {
                 className="p-2 text-sm w-full"
               />
             </div>
-            <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
+            <button className="bg-[#ff9f00]  hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
               Apply
             </button>
             <div className="border-t mt-8">
               <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
-                <span>$600</span>
+                <span>Rs {cartTotal} </span>
               </div>
-              <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+              <button className=" bg-[#ff4444] font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
                 Checkout
               </button>
             </div>
