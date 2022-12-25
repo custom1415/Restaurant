@@ -8,11 +8,11 @@ import {
   MenuOptions,
 } from "../components/menu";
 import { MenuModal } from "../components/menu/menu-modal";
+import { CartSidebar } from "../components/sidebar/sidebar";
 import {
   selectHidden,
   selectModalValues,
 } from "../redux/menu-items/menu-items.reducer";
-
 export const MenuPage = () => {
   const selectModalVisibilty = useSelector(selectHidden);
   const { name, price, time, category, source, quantity, id } =
@@ -38,6 +38,9 @@ export const MenuPage = () => {
       transition={{ duration: 0.3 }}
       className="flex flex-col lg:w-[92vw] w-screen h-auto overflow-y-scroll "
     >
+    
+      <CartSidebar />
+
       {!selectModalVisibilty && (
         <MenuModal
           id={id}

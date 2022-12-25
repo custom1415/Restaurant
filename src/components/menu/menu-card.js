@@ -2,21 +2,16 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { FiShoppingCart } from "react-icons/fi";
-import { useInView } from "react-intersection-observer";
+
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, selectCartItems } from "../../redux/cart/cart.toolkit";
-// import { addItemTocart } from "../../redux/cart/cart.actions";
-// import { selectCartItems } from "../../redux/cart/cart.selectors";
+
 import {
   selectFavourites,
   setHidden,
   setModalValue,
   setQuantityOnFilteredList,
 } from "../../redux/menu-items/menu-items.reducer";
-// const squareVariants = {
-//   visible: { opacity: 1, transition: { duration: 0.3 } },
-//   hidden: { opacity: 0 },
-// };
 
 export const MenuCard = ({
   name,
@@ -48,7 +43,21 @@ export const MenuCard = ({
   const productToAdd = { name, price, rating, source, discount, quantity, id };
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
-  const closeModal = () => dispatch(setHidden(false));
+  const closeModal = () => {
+    dispatch(
+      setModalValue({
+        name,
+        price,
+        rating,
+        time: price,
+        category,
+        source,
+        quantity,
+        id,
+      })
+    );
+    dispatch(setHidden(false));
+  };
   // const controls = useAnimation();
   // const [ref, inView] = useInView();
   //
@@ -64,27 +73,9 @@ export const MenuCard = ({
     console.log(quantity);
     setcartCount(quantity);
   };
-  //
-  //
 
-  //
-  // useEffect(() => {
-  //   if (inView) {
-  //     controls.start("visible");
-  //   }
-  //   if (!inView) {
-  //     controls.start("hidden");
-  //   }
-  // }, [controls, inView]);
-  //
-  //
   const discountAmount = price * (discount / 100);
   const newPrice = price - discountAmount;
-
-  // ref={ref}
-  // animate={controls}
-  // initial="hidden"
-  // variants={squareVariants}
 
   const handleQuantityChange = (e) => {
     if (e.target.dataset.name === "add") setQuantity(quantity + 1);
@@ -98,30 +89,9 @@ export const MenuCard = ({
   };
   return (
     <motion.div
-      onClick={() => {
-        dispatch(
-          setModalValue({
-            name,
-            price,
-            rating,
-            time: price,
-            category,
-            source,
-            quantity,
-            id,
-          })
-        );
-        closeModal();
-      }}
+      onClick={closeModal}
       className="relative w-full h-auto px-6 py-4 snap-center snap-always flex flex-col items-start justify-between rounded-3xl bg-[#f4f9fb] transition ease-linear duration-300 only:"
     >
-      {/* <MenuModal
-        name={name}
-        price={price}
-        source={source}
-        rating={rating}
-        category={category}
-      /> */}
       {discount > 1 ? (
         <div className="absolute top-[-10px] right-[-10px] rounded-[50%] bg-[#ff4444] w-12 h-12 z-10  grid place-items-center text-white text-lg">
           -{discount}%
@@ -186,7 +156,6 @@ export const MenuCard = ({
         </div>
 
         <motion.div
-          whileTap={{ scale: 2.5 }}
           className=" relative flex justify-center items-center rounded-[50%]  bg-[#ff9f00]  hover:bg-[#ff9f00]  hover:scale-105 ease-linear w-12 h-12 "
           onClick={addToCart}
         >

@@ -166,7 +166,6 @@ const maxRating = 5;
 const minDiscount = 10;
 const maxDiscount = 50;
 
-
 const newModifiedArr = [
   ...fakearr,
   ...fakearr,
@@ -175,13 +174,15 @@ const newModifiedArr = [
   ...fakearr,
 ];
 
-
 const modifiedFakearr = newModifiedArr.map((item, index) => {
   const modifiedItem = { ...item };
   if (Math.random() < 0.2) {
     modifiedItem.discount =
       Math.floor(Math.random() * (maxDiscount - minDiscount + 1)) + minDiscount;
   }
+  modifiedItem.source = `https://source.unsplash.com/random/?Burger/${Math.random().toFixed(
+    3
+  )}`;
   modifiedItem.id = Math.random();
   modifiedItem.price =
     Math.floor(Math.random() * (maxPrice - minPrice + 1)) + minPrice;

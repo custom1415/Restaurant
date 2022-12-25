@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^13.5.0",
     "framer-motion": "^7.10.2",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-content-loader": "^6.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-intersection-observer": "^9.4.1",
@@ -18,6 +20,9 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "reselect": "^4.1.7",
+    "sass": "^1.57.1",
+    "styled": "^1.0.0",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

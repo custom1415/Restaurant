@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 export const NavigationPage = () => {
   console.log("gihhi");
   return (
-    <div className="w-screen h-screen flex ">
+    <div className="w-screen h-screen flex">
       <div className="h-screen relative z-2 before:content-[''] before:border-[1px] before:border-[#ff4444] before:h-[90%] before:absolute before:top-[50%] before:right-0 before:translate-y-[-50%] flex-col justify-evenly items-center lg:flex hidden w-[8vw] min-w-[8vw]   z-20 bg-white">
         <div>
           <Link
@@ -30,7 +30,7 @@ export const NavigationPage = () => {
             to="contact"
             className="rotate-270  text-black  transform -rotate-90   text-center cursor-pointer origin-center"
           >
-         Contacts
+            Contacts
           </Link>
           <Link
             to="contact"

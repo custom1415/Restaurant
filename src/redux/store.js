@@ -5,13 +5,19 @@ import MenuReducer from "./menu-items/menu-items.reducer";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import cartToolkit from "./cart/cart.toolkit";
+import sidebarToolkit from "./sidebar/sidebar.toolkit";
 
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["sidebar"],
 };
 
-const rootReducer = combineReducers({ menu: MenuReducer, cart: cartToolkit });
+const rootReducer = combineReducers({
+  menu: MenuReducer,
+  cart: cartToolkit,
+  sidebar: sidebarToolkit,
+});
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middlewares = [

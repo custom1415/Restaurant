@@ -2,13 +2,19 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsChevronDown } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiShoppingCart } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { selectCartCount } from "../../redux/cart/cart.selectors";
 import { AiOutlineHeart } from "react-icons/ai";
 import { selectCartCount } from "../../redux/cart/cart.toolkit";
-
+import {
+  selectSidebarState,
+  toggleSidebar,
+} from "../../redux/sidebar/sidebar.toolkit";
 export const MenuNav = () => {
   const cartCount = useSelector(selectCartCount);
+  const sidebarState = useSelector(selectSidebarState);
+  const dispatch = useDispatch();
+  const toggleSidebarState = () => dispatch(toggleSidebar(!sidebarState));
   console.log(cartCount);
   return (
     <div className="w-full min-h-20 flex justify-between items-center p-4 relative ">
@@ -29,7 +35,10 @@ export const MenuNav = () => {
           <BsChevronDown className="ml-2 hover:text-gray-400 " />
         </div>
         <div className="w-8 h-8 p-2 grid place-items-center bg-[#ff9000] relative ml-4  rounded-[50%]">
-          <FiShoppingCart className=" text-white hover:text-gray-400" />
+          <FiShoppingCart
+            className=" text-white hover:text-gray-400"
+            onClick={toggleSidebarState}
+          />
           {cartCount > 0 && (
             <div className="w-5 h-5 absolute top-[-8px] right-[-8px] rounded-[50%] bg-red-500 grid place-items-center text-white text-[10px]">
               {cartCount}
