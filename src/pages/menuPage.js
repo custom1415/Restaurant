@@ -8,6 +8,7 @@ import {
   MenuOptions,
 } from "../components/menu";
 import { MenuModal } from "../components/menu/menu-modal";
+import { MenuNavBottom } from "../components/menu/menu-page-navbar-bottom";
 import { CartSidebar } from "../components/sidebar/sidebar";
 import {
   selectHidden,
@@ -17,15 +18,11 @@ import { selectSidebarState } from "../redux/sidebar/sidebar.toolkit";
 export const MenuPage = () => {
   const sidebarState = useSelector(selectSidebarState);
   const selectModalVisibilty = useSelector(selectHidden);
-  const { name, price, time, category, source, quantity, id } =
+  const { name, price, time, category, source, quantity, id, rating } =
     useSelector(selectModalValues);
   const [modifiedQuantity, setmodifiedQuantity] = useState(quantity);
   const changeQuantity = useMemo((val) => {
     return setmodifiedQuantity(val);
-  }, []);
-  const scrollRef = useRef(null);
-  useEffect(() => {
-    console.log(scrollRef.current);
   }, []);
 
   useEffect(() => {
@@ -38,11 +35,12 @@ export const MenuPage = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="flex flex-col lg:w-[92vw] w-screen min-h-screen h-auto overflow-y-scroll "
+      className="flex flex-col lg:w-[92%] w-full w-screen min-h-screen h-auto overflow-y-scroll "
     >
       <CartSidebar sidebarState={sidebarState} />
       {!selectModalVisibilty && (
         <MenuModal
+          rating={rating}
           id={id}
           name={name}
           price={price}
@@ -57,6 +55,7 @@ export const MenuPage = () => {
       <MenuOptions />
       <MenuCategory />
       <MenuCardsList setmodifiedQuantity={changeQuantity} />
+      <MenuNavBottom />
     </motion.div>
   );
 };

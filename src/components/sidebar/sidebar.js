@@ -72,10 +72,10 @@ export const CartSidebar = ({ sidebarState }) => {
             </Subtotal>
             <ButtonWrapper>
               <StyledLink to="/cart">
-                <Button>VIEW CART</Button>
+                <Button onClick={showCartSidebar}>VIEW CART</Button>
               </StyledLink>
               <StyledLink to="/checkout">
-                <Button>CHECKOUT</Button>
+                <Button onClick={showCartSidebar}>CHECKOUT</Button>
               </StyledLink>
             </ButtonWrapper>
           </SidebarFooter>

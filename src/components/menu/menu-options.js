@@ -27,11 +27,11 @@ export const MenuOptions = () => {
             <option className="bg-gray-400">Sort By Price</option>
 
             <option value="low-to-high" className="bg-gray-400  ">
-              Low to High
+             Price- Low to High
             </option>
 
             <option value="high-to-low" className="bg-gray-400  ">
-              High to low
+             Price- High to low
             </option>
             <option value="discount" className="bg-gray-400  ">
               Discount available

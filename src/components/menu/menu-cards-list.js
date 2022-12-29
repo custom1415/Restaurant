@@ -29,6 +29,7 @@ export const MenuCardsList = memo(() => {
     (item, i) => {
       const { name, price, rating, discount, id, source } = item;
       const getQty = cartItems.find((item) => item.id === id);
+
       let quantity = 0;
       if (getQty) {
         const { quantity: qty } = getQty;
@@ -41,6 +42,7 @@ export const MenuCardsList = memo(() => {
       }
 
       const newStar = [stars].filter(Boolean)[0].slice(9);
+
       const checkDiscount = discount ? discount : 0;
 
       return (

@@ -11,23 +11,22 @@ import {
   toggleSidebar,
 } from "../../redux/sidebar/sidebar.toolkit";
 import { selectFavourites } from "../../redux/menu-items/menu-items.reducer";
-export const MenuNav = () => {
+import { useNavigate } from "react-router-dom";
+export const MenuNavBottom = () => {
   const cartCount = useSelector(selectCartCount);
   const dispatch = useDispatch();
   const toggleSidebarState = () => dispatch(toggleSidebar());
   const favourites = useSelector(selectFavourites);
-  console.log(cartCount);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/favourites");
+  };
 
   return (
-    <div className="w-full min-h-20 flex justify-between items-center p-4 relative ">
-      <h3 className="text-3xl supersm:block hidden ">Menu</h3>
-      <div className="flex items-center justify-between supersm:w-auto w-full">
-        <input
-          className="mr-5 bg-slate-100 placeholder-gray-500 placeholder-opacity-100 outline-none py-2 px-3 focus:ring-0 rounded-3xl md:w-80 sm:w-72 w-52 "
-          placeholder="Search"
-        />
+    <div className="min-h-20 flex justify-center items-center p-4 fixed bottom-0 bg-white lg:hidden w-full shadow-black shadow-md z-50">
+      <div className="flex items-center justify-between px-3 w-full ">
         {/* <IoMdNotificationsOutline className="ml-4 hover:text-gray-400" /> */}
-        <div className="relative">
+        <div className="relative" onClick={handleClick}>
           <AiOutlineHeart className=" text-2xl" />
           <div className="w-5 h-5 absolute top-[-10px] right-[-10px] rounded-[50%] bg-red-500 grid place-items-center text-white text-[10px]">
             {favourites.length}
@@ -35,16 +34,16 @@ export const MenuNav = () => {
         </div>
 
         {/* <RiSettingsLine className="ml-4 hover:text-gray-400" /> */}
-        <div className="sm:flex hidden items-center ml-4 sm:flex-row text-2xl ">
+        <div className="text-2xl ">
           <AiOutlineUser className="ml-2 hover:text-gray-400" />
           {/* <p className="ml-2 hover:text-gray-400">Saroj</p>
           <BsChevronDown className="ml-2 hover:text-gray-400 " /> */}
         </div>
-        <div className="w-8 h-8 p-2 grid place-items-center bg-[#ff9000] relative ml-4  rounded-[50%]">
-          <FiShoppingCart
-            className=" text-white hover:text-gray-400"
-            onClick={toggleSidebarState}
-          />
+        <div
+          className="w-8 h-8 p-2 grid place-items-center bg-[#ff9000] relative   rounded-[50%] transition ml-4 hover:scale-125"
+          onClick={toggleSidebarState}
+        >
+          <FiShoppingCart className=" text-white cursor-pointer " />
           {cartCount > 0 && (
             <div className="w-5 h-5 absolute top-[-8px] right-[-8px] rounded-[50%] bg-red-500 grid place-items-center text-white text-[10px]">
               {cartCount}

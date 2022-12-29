@@ -7,13 +7,14 @@ import Fries from "../components/assets/friesrem.png";
 import { FaHamburger } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Testimonials from "../components/Testimonials/testimonials";
 
 export const LandingPage = () => {
   const [Hidden, setHidden] = useState(true);
   return (
-    <>
+    <div className="flex flex-col">
       {!Hidden && (
-        <div className="w-screen h-screen fixed bg-white z-40 top-0 left-0 lg:hidden flex justify-center items-start pt-24">
+        <div className="lg:[92%] w-screen h-screen fixed bg-white z-40 top-0 left-0 lg:hidden flex justify-center items-start pt-24">
           <div className="flex flex-col w-[80%] justify-center items-center">
             <Link
               onClick={() => setHidden(true)}
@@ -60,7 +61,7 @@ export const LandingPage = () => {
           </div>
         </div>
       )}
-      <div className="lg:w-[92vw] h-auto  py-9 lg:px-8 px-12">
+      <div className="lg:w-[92%] h-auto  py-9 lg:px-8 px-12">
         <div className="flex justify-between items-center ">
           <h1 className="text-2xl">Bla Bla</h1>
           <FaHamburger
@@ -109,6 +110,7 @@ export const LandingPage = () => {
           </div>
         </div>
       </div>
-    </>
+      <Testimonials />
+    </div>
   );
 };

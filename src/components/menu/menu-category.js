@@ -20,8 +20,8 @@ export const MenuCategory = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="w-auto min-h-18 mb-3  px-6 ">
-      <div className="flex justify-between items-center overflow-x-scroll snap-x snap-mandatory">
+    <div className="lg-[92%] w-full min-h-18 mb-3  px-4 ">
+      <div className="categories flex justify-between items-center overflow-x-scroll snap-x snap-mandatory">
         {newArr?.map(([name, emoji], i) => {
           return (
             <div

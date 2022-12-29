@@ -183,11 +183,12 @@ const modifiedFakearr = newModifiedArr.map((item, index) => {
   modifiedItem.source = `https://source.unsplash.com/random/?Burger/${Math.random().toFixed(
     3
   )}`;
-  modifiedItem.id = Math.random();
+  modifiedItem.id = index + 1;
   modifiedItem.price =
     Math.floor(Math.random() * (maxPrice - minPrice + 1)) + minPrice;
   modifiedItem.rating =
     Math.floor(Math.random() * (maxRating - minRating + 1)) + minRating;
   return modifiedItem;
 });
+
 export { modifiedFakearr };

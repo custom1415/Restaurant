@@ -16,7 +16,7 @@ export const SidebarWrapper = styled.aside`
 `;
 export const Overlay = styled.div`
   position: fixed;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   top: 0;
   right: 0;
@@ -112,7 +112,7 @@ export const ButtonWrapper = styled.div`
     margin-left: 2rem;
     color: white;
 
-    background-color: #ff4444;
+    background-color: #ff3232;
   }
   & > *:nth-child(1) {
     color: black;

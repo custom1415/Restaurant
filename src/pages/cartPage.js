@@ -10,16 +10,14 @@ export const CartPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log("hi");
     navigate("/menu");
 
-    console.log("hascascscascasci");
   };
   const cartCount = useSelector(selectCartCount);
   const cartTotal = useSelector(selectCartTotal);
   return (
     <>
-      <div className="lg:w-[92vw] w-screen h-screen overflow-y-scroll ">
+      <div className="lg:w-[92%] w-full h-screen overflow-y-scroll  ">
         <div className="flex shadow-md my-3">
           <div className="w-[70%] bg-white px-10 py-10">
             <div className="flex justify-between border-b pb-8">

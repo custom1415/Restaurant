@@ -1,11 +1,12 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
+import ContentLoader from "react-content-loader";
 import { AiFillHeart } from "react-icons/ai";
 import { FiShoppingCart } from "react-icons/fi";
 
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { addItemToCart, selectCartItems } from "../../redux/cart/cart.toolkit";
-
 import {
   selectFavourites,
   setHidden,
@@ -24,12 +25,13 @@ export const MenuCard = ({
   id,
 }) => {
   const [isFavourite, setIsFavourite] = useState(false);
+  const location = useLocation();
+  const path = location.pathname.slice(1);
 
   const favourite = useSelector(selectFavourites);
 
   useEffect(() => {
     favourite.forEach((item) => {
-      console.log(item);
       if (item.id === id) {
         setIsFavourite(item.isFavourite);
       }
@@ -40,22 +42,22 @@ export const MenuCard = ({
 
   // States
   const [cartCount, setcartCount] = useState(persistedQuantity);
-  const productToAdd = { name, price, rating, source, discount, quantity, id };
+
+  const productToAdd = {
+    name,
+    price,
+    rating,
+    source,
+    discount,
+    quantity,
+    id,
+    category,
+  };
   const dispatch = useDispatch();
+
   const cartItems = useSelector(selectCartItems);
   const closeModal = () => {
-    dispatch(
-      setModalValue({
-        name,
-        price,
-        rating,
-        time: price,
-        category,
-        source,
-        quantity,
-        id,
-      })
-    );
+    dispatch(setModalValue({ ...productToAdd }));
     dispatch(setHidden(false));
   };
   // const controls = useAnimation();
@@ -64,19 +66,16 @@ export const MenuCard = ({
   //
   const addToCart = (e) => {
     e.stopPropagation();
-    console.log(quantity, persistedQuantity);
     if (quantity === persistedQuantity) return;
 
     // dispatch(setQuantityOnFilteredList({ id, name, quantity }));
     dispatch(addItemToCart({ cartItems, productToAdd }));
 
-    console.log(quantity);
     setcartCount(quantity);
   };
 
   const discountAmount = price * (discount / 100);
   const newPrice = price - discountAmount;
-
   const handleQuantityChange = (e) => {
     if (e.target.dataset.name === "add") setQuantity(quantity + 1);
     if (e.target.dataset.name === "remove") {
@@ -87,10 +86,11 @@ export const MenuCard = ({
       setQuantity(quantity - 1);
     }
   };
+
   return (
     <motion.div
       onClick={closeModal}
-      className="relative w-full h-auto px-6 py-4 snap-center snap-always flex flex-col items-start justify-between rounded-3xl bg-[#f4f9fb] transition ease-linear duration-300 only:"
+      className="card relative w-full h-auto px-6 py-4 snap-center snap-always flex flex-col items-start justify-between rounded-3xl bg-[#f4f9fb] transition ease-linear duration-300 "
     >
       {discount > 1 ? (
         <div className="absolute top-[-10px] right-[-10px] rounded-[50%] bg-[#ff4444] w-12 h-12 z-10  grid place-items-center text-white text-lg">
@@ -102,12 +102,16 @@ export const MenuCard = ({
         {rating}
       </div> */}
 
-      <div className="imgName relative w-full h-44 mb-2 rounded-3xl">
-        <img className=" w-full h-full rounded-3xl object-cover" src={source} />
+      <div className="imgName relative w-full h-44 mb-2 rounded-3xl  transition ease-linear">
+        <img
+          src={source}
+          alt={name}
+          className="w-full h-full object-cover rounded-3xl transition ease-linear duration-300"
+        />
         <p className="absolute bottom-0 left-[50%] translate-x-[-50%] text-xl text-white">
           {name}
         </p>
-        {isFavourite && (
+        {isFavourite && path !== "favourites" && (
           <div className="w-6 h-6 absolute top-[8px] left-[8px] rounded-[50%] bg-red-500 grid place-items-center text-white">
             <AiFillHeart />
           </div>
@@ -156,11 +160,11 @@ export const MenuCard = ({
         </div>
 
         <motion.div
-          className=" relative flex justify-center items-center rounded-[50%]  bg-[#ff9f00]  hover:bg-[#ff9f00]  hover:scale-105 ease-linear w-12 h-12 "
+          className=" relative flex justify-center items-center rounded-[50%]  bg-[#ff3232]  hover:scale-[1.1] transition  ease-linear w-12 h-12 "
           onClick={addToCart}
         >
           {cartCount > 0 && (
-            <div className="w-6 h-6 absolute top-[-4px] right-[-6px] rounded-[50%] bg-red-500 grid place-items-center text-white">
+            <div className="w-6 h-6 absolute top-[-4px] right-[-6px] rounded-[50%] bg-[#ff9f00] grid place-items-center text-white">
               {cartCount}
             </div>
           )}

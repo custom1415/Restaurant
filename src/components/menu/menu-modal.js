@@ -9,6 +9,7 @@ import {
   setHidden,
 } from "../../redux/menu-items/menu-items.reducer";
 import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart, selectCartItems } from "../../redux/cart/cart.toolkit";
 export const MenuModal = ({
   source,
   name,
@@ -17,24 +18,54 @@ export const MenuModal = ({
   rating,
   id,
   quantity,
-  setModifiedQuantity,
 }) => {
-  const item = { source, name, category, price, rating, quantity, id };
   console.log(quantity);
   const dispatch = useDispatch();
   const closeModal = () => dispatch(setHidden(true));
   const favourite = useSelector(selectFavourites);
+  const cartItems = useSelector(selectCartItems);
+
   console.log(favourite);
   const [isFavourite, setIsFavourite] = useState(false);
+  const [qty, setQty] = useState(quantity);
+  const productToAdd = {
+    source,
+    name,
+    category,
+    price,
+    rating,
+    quantity: qty,
+    id,
+  };
   useEffect(() => {
-    favourite.forEach((item) => {
-      if (item.id === id) {
-        setIsFavourite(item.isFavourite);
+    favourite.forEach((productToAdd) => {
+      if (productToAdd.id === id) {
+        setIsFavourite(productToAdd.isFavourite);
       }
     });
   }, []);
+  useEffect(() => {
+    setQty(quantity);
+  }, [quantity]);
+  const handleQuantityChange = (e) => {
+    if (e.target.dataset.name === "add") setQty(qty + 1);
+    if (e.target.dataset.name === "remove") {
+      if (qty === 0) {
+        setQty(0);
+        return;
+      }
+      setQty(qty - 1);
+    }
+  };
+  const addToCart = (e) => {
+    e.stopPropagation();
+    if (qty === quantity) return;
 
-  console.log(price);
+    // dispatch(setQuantityOnFilteredList({ id, name, quantity }));
+    dispatch(addItemToCart({ cartItems, productToAdd }));
+
+    // setcartCount(quantity);
+  };
   return (
     <div className="w-screen h-screen grid place-items-center fixed top-0 left-0 z-20">
       <div className="overlay"></div>
@@ -50,11 +81,11 @@ export const MenuModal = ({
             className="bg-[#ff9f00] text-white md:p-1 p-[2px] md:translate-y-2 md:translate-x-0  translate-x-[-10px]"
             onClick={() => {
               setIsFavourite(!isFavourite);
-              dispatch(setFavourites({ isFavourite, item }));
+              dispatch(setFavourites({ isFavourite, productToAdd }));
             }}
           >
             {isFavourite ? (
-              <AiFillHeart className="text-2xl " />
+              <AiFillHeart className="text-2xl text-[#ff4000]" />
             ) : (
               <AiOutlineHeart className="text-2xl " />
             )}
@@ -119,13 +150,17 @@ export const MenuModal = ({
           </div>
           <div className="md:col-span-1 col-span-2 flex bg-gray-200 justify-between rounded-3xl sm:h-12 h-10  items-center   w-full p-2 mx-auto ">
             <motion.div
+              onClick={handleQuantityChange}
+              data-name="remove"
               whileTap={{ scale: 1.5 }}
               className="box-shadow flex justify-center items-center h-[30px] ] w-[30px]   hover:scale-105  bg-[#ff9f00] px-3 py-1 text-white rounded-[50%]"
             >
               -
             </motion.div>
-            <span className=" mx-3">{quantity}</span>
+            <span className=" mx-3">{qty}</span>
             <motion.div
+              onClick={handleQuantityChange}
+              data-name="add"
               whileTap={{ scale: 1.5 }}
               className=" box-shadow flex justify-center items-center  hover:scale-105  bg-[#ff9f00] px-3 py-1 text-white rounded-[50%]   h-[30px]  w-[30px]"
             >
@@ -133,7 +168,10 @@ export const MenuModal = ({
             </motion.div>
           </div>
         </div>
-        <div className=" flex bg-[#ff9f00] px-3 justify-center items-center rounded-[37px] w-full sm:py-3 py-1 text-white sm:text-2xl text-xl">
+        <div
+          className=" flex  px-3 justify-center items-center rounded-[37px] w-full sm:py-3 py-1 text-white sm:text-2xl text-xl bg-[#ff0000] hover:bg-[#ff3232] cursor-pointer"
+          onClick={addToCart}
+        >
           Add to Cart
           <FaShoppingCart className="ml-4" />
         </div>

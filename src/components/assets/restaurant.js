@@ -216,78 +216,79 @@ const data = {
       },
     ],
   },
-
-  pizza: [
-    {
-      name: "Cheese Pizza",
-      price: 300,
-      portion: "per plate",
-    },
-    {
-      name: "Veg Pizza",
-      price: 300,
-      portion: "per plate",
-    },
-    {
-      name: "Mushroom Pizza",
-      price: 320,
-      portion: "per plate",
-    },
-    {
-      name: "Chicken Pizza",
-      price: 350,
-      portion: "per plate",
-    },
-    {
-      name: "Mix Pizza",
-      price: 400,
-      portion: "per plate",
-    },
-    {
-      name: "Extra Cheese",
-      price: 75,
-      portion: "add-on",
-    },
-  ],
-  biryani: [
-    {
-      name: "Veg. Biryani",
-      price: 200,
-      portion: "per plate",
-    },
-    {
-      name: "Chicken Biryani",
-      price: 300,
-      portion: "per plate",
-    },
-    {
-      name: "Mutton Biryani",
-      price: 400,
-      portion: "per plate",
-    },
-  ],
-  salad: [
-    {
-      name: "Green Salad",
-      price: 220,
-      portion: "per plate",
-    },
-    {
-      name: "Nepali Salad",
-      price: 150,
-      portion: "per plate",
-    },
-    {
-      name: "Fruit Salad",
-      price: 300,
-      portion: "per plate",
-    },
-    {
-      name: "Mix Fruit Salad",
-      price: 450,
-      portion: "per plate",
-    },
-  ],
+  best: {
+    pizza: [
+      {
+        name: "Cheese Pizza",
+        price: 300,
+        portion: "per plate",
+      },
+      {
+        name: "Veg Pizza",
+        price: 300,
+        portion: "per plate",
+      },
+      {
+        name: "Mushroom Pizza",
+        price: 320,
+        portion: "per plate",
+      },
+      {
+        name: "Chicken Pizza",
+        price: 350,
+        portion: "per plate",
+      },
+      {
+        name: "Mix Pizza",
+        price: 400,
+        portion: "per plate",
+      },
+      {
+        name: "Extra Cheese",
+        price: 75,
+        portion: "add-on",
+      },
+    ],
+    biryani: [
+      {
+        name: "Veg. Biryani",
+        price: 200,
+        portion: "per plate",
+      },
+      {
+        name: "Chicken Biryani",
+        price: 300,
+        portion: "per plate",
+      },
+      {
+        name: "Mutton Biryani",
+        price: 400,
+        portion: "per plate",
+      },
+    ],
+    salad: [
+      {
+        name: "Green Salad",
+        price: 220,
+        portion: "per plate",
+      },
+      {
+        name: "Nepali Salad",
+        price: 150,
+        portion: "per plate",
+      },
+      {
+        name: "Fruit Salad",
+        price: 300,
+        portion: "per plate",
+      },
+      {
+        name: "Mix Fruit Salad",
+        price: 450,
+        portion: "per plate",
+      },
+    ],
+  },
   drinks: {
     cold_drinks: [
       {
@@ -740,16 +741,26 @@ const data = {
         name: "Buff Sausage",
         price: 180,
         portion: "per plate",
+        image:
+          "https://dukaan-us.s3.amazonaws.com/6927492/1c5f5208-a404-49ea-9745-0596f42df9d9/buffsausage-5cd89eef-0ecc-4ed3-9578-e1752b486e4f.jpeg",
       },
       {
         name: "Potato Meat Ball (Buff/Chicken)",
         price: 200,
         portion: "per plate",
+        alternatives: [
+          "https://thrivingnest.com/wp-content/uploads/2021/11/baby-chicken-meatballs-blw.jpg",
+          "https://www.onceuponachef.com/images/2009/12/Chicken-Meatballs.jpg",
+        ],
+        image:
+          "https://en.julskitchen.com/wp-content/uploads/sites/2/2011/12/Chicken-and-potato-meatballs-2-500x500.jpg",
       },
       {
         name: "Haas ko Choila",
         price: 400,
         portion: "per plate",
+        image:
+          "https://lh3.googleusercontent.com/p/AF1QipNqiSyAJK4Dsz0aWhUFtC9mI2nlGBjNzmLI-do2=w768-h768-n-o-v1",
       },
     ],
   },

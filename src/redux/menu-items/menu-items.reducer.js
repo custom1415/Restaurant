@@ -94,16 +94,16 @@ const menuSlice = createSlice({
       };
     },
     setFavourites(state, action) {
-      const { isFavourite, item } = action.payload;
+      const { isFavourite, productToAdd } = action.payload;
 
       if (isFavourite) {
         return {
           ...state,
           favourites: [...state.favourites].filter(
-            (itemFav) => itemFav.id !== item.id
+            (itemFav) => itemFav.id !== productToAdd.id
           ),
           filteredItems: state.filteredItems.map((filteredItem) => {
-            if (filteredItem.id === item.id) {
+            if (filteredItem.id === productToAdd.id) {
               return { ...filteredItem, isFavourite: false };
             }
             return filteredItem;
@@ -112,9 +112,12 @@ const menuSlice = createSlice({
       }
       return {
         ...state,
-        favourites: [...state.favourites, { ...item, isFavourite: true }],
+        favourites: [
+          ...state.favourites,
+          { ...productToAdd, isFavourite: true },
+        ],
         filteredItems: state.filteredItems.map((filteredItem) => {
-          if (filteredItem.id === item.id) {
+          if (filteredItem.id === productToAdd.id) {
             return { ...filteredItem, isFavourite: true };
           }
           return filteredItem;
